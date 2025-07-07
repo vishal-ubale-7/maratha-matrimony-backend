@@ -1,0 +1,8 @@
+package com.matrimony.Repositories;
+
+import com.matrimony.Entities.Education;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface EducationRepository extends JpaRepository<Education,Long>
+{
+}
