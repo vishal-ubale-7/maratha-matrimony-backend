@@ -1,4 +1,4 @@
-package com.matrimony.Security;
+package com.matrimony.Config;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

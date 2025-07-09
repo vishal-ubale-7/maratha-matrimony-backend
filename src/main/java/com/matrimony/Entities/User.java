@@ -1,7 +1,12 @@
 package com.matrimony.Entities;
 
+import com.matrimony.Entities.Role;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
+
 
 @Entity
 public class User
@@ -27,9 +32,13 @@ public class User
     @JsonIgnoreProperties("user")
     private Education education;
 
-    public User() {
 
-    }
+    @Enumerated(EnumType.STRING)
+    private Role role = Role.USER;
+
+
+    public User()
+    {}
 
 
     public int getAge() {
@@ -130,5 +139,17 @@ public class User
 
     public User(String profileImagePath) {
         this.profileImagePath = profileImagePath;
+    }
+
+    public void setRole(Role role)
+    {
+    }
+
+    public void setPreferences(Preferences savedPreferences)
+    {
+    }
+
+    public void setAddress(Address savedAddress)
+    {
     }
 }

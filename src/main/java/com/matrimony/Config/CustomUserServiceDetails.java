@@ -1,4 +1,4 @@
-package com.matrimony.Security;
+package com.matrimony.Config;
 
 import com.matrimony.Entities.User;
 import com.matrimony.Repositories.UserRepository;

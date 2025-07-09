@@ -8,6 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.matrimony.DTO.UserDTO;
+import com.matrimony.Entities.User;
+import com.matrimony.Service.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
 import java.util.List;
 
 @RestController
@@ -16,6 +22,9 @@ public class UserGalleryController
 {
     @Autowired
     private UserGalleryService galleryService;
+
+    @Autowired
+    private  UserService userService;
 
     // Upload multiple images
     @PostMapping("/upload/{userId}")
@@ -39,6 +48,13 @@ public class UserGalleryController
     {
         List<UserGallery> galleryList = galleryService.getImagesByUser(userId);
         return ResponseEntity.ok(galleryList);
+    }
+
+
+    // 🔽 API to create 1 full user with all details
+    @PostMapping("/register")
+    public User registerUser(@RequestBody UserDTO userDTO) {
+        return userService.registerFullUser(userDTO);
     }
 
 }

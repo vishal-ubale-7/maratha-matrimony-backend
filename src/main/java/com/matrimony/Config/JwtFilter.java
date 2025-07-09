@@ -1,4 +1,4 @@
-package com.matrimony.Security;
+package com.matrimony.Config;
 
 
 import jakarta.servlet.FilterChain;

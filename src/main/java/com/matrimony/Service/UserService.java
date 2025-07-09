@@ -1,10 +1,11 @@
 package com.matrimony.Service;
 
-import com.matrimony.Entities.User;
-import com.matrimony.Repositories.UserRepository;
+import com.matrimony.DTO.UserDTO;
+import com.matrimony.Entities.*;
+import com.matrimony.Repositories.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
+import org.springframework.security.crypto.password.PasswordEncoder; // ✅ CORRECT
 
 import java.util.Collections;
 import java.util.List;
@@ -16,6 +17,21 @@ public class UserService
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    private AddressRepository addressRepository;
+
+    @Autowired
+    private EducationRepository educationRepository;
+
+    @Autowired
+    private JobRepository jobRepository;
+
+    @Autowired
+    private PreferencesRepository preferencesRepository;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     // create users
     public List<User> saveAll(List< User> users)
@@ -100,6 +116,36 @@ public class UserService
     public List<User> searchUsers(String gender, String caste, Integer minAge, Integer maxAge)
     {
         return userRepository.searchUsers(gender, caste, minAge, maxAge);
+    }
+
+    public User registerFullUser(UserDTO dto) {
+
+        // Check if email already exists
+        if (userRepository.existsByEmail(dto.getEmail())) {
+            throw new RuntimeException("Email already exists: " + dto.getEmail());
+        }
+
+        // Save sub-entities first
+        Address savedAddress = addressRepository.save(dto.getAddress());
+        Education savedEducation = educationRepository.save(dto.getEducation());
+        Job savedJob = jobRepository.save(dto.getJob());
+        Preferences savedPreferences = preferencesRepository.save(dto.getPreferences());
+
+        // Create and save user
+        User user = new User();
+        user.setName(dto.getName());
+        user.setEmail(dto.getEmail());
+        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+        user.setRole(dto.getRole());
+        user.setAge(dto.getAge());
+        user.setGender(dto.getGender());
+        user.setCaste(dto.getCaste());
+        user.setAddress(savedAddress);
+        user.setEducation(savedEducation);
+        user.setJob(savedJob);
+        user.setPreferences(savedPreferences);
+
+        return userRepository.save(user);
     }
 
 

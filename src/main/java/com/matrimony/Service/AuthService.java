@@ -6,7 +6,7 @@ import com.matrimony.DTO.LoginRequest;
 import com.matrimony.DTO.RegisterRequest;
 import com.matrimony.Entities.User;
 import com.matrimony.Repositories.UserRepository;
-import com.matrimony.Security.JwtUtil;
+import com.matrimony.Config.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.security.crypto.password.PasswordEncoder;

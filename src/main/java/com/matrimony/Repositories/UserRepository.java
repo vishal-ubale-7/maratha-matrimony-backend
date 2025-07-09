@@ -28,6 +28,9 @@ public interface UserRepository  extends JpaRepository<User , Long>
             @Param("minAge") Integer minAge,
             @Param("maxAge") Integer maxAge
     );
+;
+    boolean existsByEmail(String email);
+
 
 }
 
