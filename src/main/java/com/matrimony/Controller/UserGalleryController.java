@@ -51,7 +51,7 @@ public class UserGalleryController
     }
 
 
-    // 🔽 API to create 1 full user with all details
+    // API to create 1 full user with all details
     @PostMapping("/register")
     public User registerUser(@RequestBody UserDTO userDTO) {
         return userService.registerFullUser(userDTO);
